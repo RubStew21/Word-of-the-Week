@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Word of the Week</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            padding: 50px;
+            background-color: #f0f0f0;
+        }
+        #wordDisplay {
+            font-size: 36px;
+            margin: 20px;
+            min-height: 50px;
+            color: #333;
+        }
+        .button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 15px 32px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            margin: 4px 2px;
+            cursor: pointer;
+            border: none;
+            border-radius: 4px;
+        }
+        .button:hover {
+            background-color: #45a049;
+        }
+        #linkButton {
+            background-color: #ff9c00;
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <h1>Word of the Week Generator</h1>
+    <div id="wordDisplay"></div>
+    <button class="button" onclick="startRotation()">Generate Word</button>
+    <br>
+    <a id="linkButton" href="https://docs.google.com/document/d/1vPH5dMx44y-5xhXVbNRuTyCtvt8MmEwy8HbJwQuW87M/edit?usp=sharing" class="button">Click Here Now!</a>
+
+    <script>
+        const words = [
+            "Happiness", "Adventure", "Serenity", "Discovery", 
+            "Harmony", "Wonder", "Journey", "Magic", 
+            "Mystery", "Dream", "Destiny", "Freedom",
+            "Victory", "Wisdom", "Courage", "Spirit"
+        ];
+        
+        let intervalId;
+        let isRotating = false;
+
+        function startRotation() {
+            if (isRotating) return;
+            isRotating = true;
+            document.getElementById('linkButton').style.display = 'none';
+            
+            intervalId = setInterval(() => {
+                const randomWord = words[Math.floor(Math.random() * words.length)];
+                document.getElementById('wordDisplay').textContent = randomWord;
+            }, 100);
+
+            setTimeout(() => {
+                clearInterval(intervalId);
+                isRotating = false;
+                alert("Here's your word!");
+                document.getElementById('linkButton').style.display = 'inline-block';
+            }, 2000);
+        }
+    </script>
+</body>
+</html>
